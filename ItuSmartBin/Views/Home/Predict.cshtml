@@ -1,0 +1,85 @@
+﻿@model ItuSmartBin.Models.binimageclassification
+
+@{
+
+}
+
+<h2>Artificial Intelligence Smart Bin</h2>
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Smart Bin Prototype that Identify if Picture Uploaded is a Bottle or a can</h4>
+    <hr />
+
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <form method="post" enctype="multipart/form-data">
+
+        <ul>
+            <ul>
+
+
+                <label> Upload Image of a Can or plastic Bottle</label>
+                <input type="file" multiple="multiple" name="imagefile" id="imagefile" accept="image/*" required />
+
+            </ul>
+        </ul>
+
+
+    </form>
+
+    @if (ViewBag.binList != null)
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tagname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.percentage)
+                </th>
+                @*<th>
+                    @Html.DisplayNameFor(model => model.results)
+                </th>*@
+                @*<th></th>*@
+            </tr>
+
+            @foreach (var item in ViewBag.binList)
+            {
+                <tr>
+                    <td>
+                        @item.Tagname
+                    </td>
+                    <td>
+                        @item.percentage
+                    </td>
+                    @*<td>
+                        @item.results
+                    </td>*@
+                   
+                </tr>
+            }
+
+        </table>
+    }
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Sumit" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+}
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
